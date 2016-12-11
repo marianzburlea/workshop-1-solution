@@ -1,0 +1,17 @@
+
+$class: 'footer';
+
+.#{$class}-menu-title {
+  font-size: 1rem;
+}
+
+.#{$class}-menu-bottom,
+.#{$class}-menu-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.#{$class}-menu-bottom-link:not(:last-child):after {
+  content: '|';
+  margin: 0 0.5rem;
+}

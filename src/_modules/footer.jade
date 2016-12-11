@@ -1,0 +1,14 @@
+- var footer = site.data.content.footer
+footer
+  .row
+    each item in footer['menu-list']
+      .col-md-3.col-xs-6
+        h3.footer-menu-title #{item.title}
+        ul.footer-menu-list
+          each link in item['list-link']
+            li: a(href="#{link.link}") #{link.text}
+
+  .row
+    .col-xs-6.offset-xs-3.text-xs-center
+      each link in footer['menu-bottom']
+        span.footer-menu-bottom-link: a(href="#{link.link}") #{link.text}

@@ -1,0 +1,35 @@
+extends _layouts/base
+
+block config
+  - var baseUrl = './'
+  - var pageInfo = site.data.content.page['index']
+
+include _modules/link/link
+
+block content
+  - currentPage = '/'
+  include _modules/header
+  include _modules/top-menu
+
+  each article in pageInfo.article
+    .row
+      .col-md-6
+        h2 #{article.title}
+        each description in article.description
+          if description.type === "paragraph"
+            p !{description.content}
+        each link in article.link
+          a.btn.btn-block.btn-success(href="#{link.href}") #{link.text}
+      .col-md-6
+        img(src="#{article.image.src}", width="100%")
+
+  include _modules/footer
+
+  //- .yeogurt-info
+  //-   p.
+  //-     Take a look at the
+  //-     #[+link({text: 'documentation'})(href='https://github.com/larsonjj/generator-yeogurt#yeogurt-generator---')]
+  //-     and start mixing up something awesome.
+  //-   p
+  //-     img.logo(src="images/yeogurt-swirl.png", width="75px")
+

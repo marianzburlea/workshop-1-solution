@@ -1,0 +1,11 @@
+//- http://v4-alpha.getbootstrap.com/examples/narrow-jumbotron/
+.header.clearfix
+  nav
+    ul.nav.nav-pills.float-xs-right
+      each page, key in site.data.content['top-menu']
+        li.nav-item
+          if currentPage === page.href
+            a.nav-link.active(href="#{page.href}") #{page.text}
+          else
+            a.nav-link(href="#{page.href}") #{page.text}
+  h3.text-muted Assignment 1

@@ -1,0 +1,51 @@
+extends ../_layouts/base
+
+block config
+  //- Correct base url pathing for this page
+  - var baseUrl = '../'
+  - var pageInfo = site.data.content.page['features']
+
+block content
+  - currentPage = '/features'
+  include ../_modules/header
+  include ../_modules/top-menu
+  each article in pageInfo.article
+    .row
+      .col-md-6.col-relative
+        input(type="radio", name="smartInfoPopup", id="close-popup")
+        h2 #{article.title}
+        each description in article.description
+          if description.type === "paragraph"
+            p !{description.content}
+          if description.type === "icon-list"
+            each icon in description.content
+              p icon - #{icon}
+          if description.type === "list"
+            ul
+              each item in description.content
+                li !{item}
+          if description.type === "smart-list"
+            each smartItem in description.content
+              label(for="#{smartItem.title.toLowerCase().replace(' ', '-')}") #{smartItem.title}
+              p #{smartItem.description}
+              input(id="#{smartItem.title.toLowerCase().replace(' ', '-')}", type="radio", name="smartInfoPopup")
+              .smart-info
+                label.close-popup(for="close-popup") &times;
+                each smartItemInfo in smartItem.content
+                  if smartItemInfo.type === "icon-list"
+                    ul
+                      each icon in smartItemInfo.content
+                        li !{icon}
+                  if smartItemInfo.type === "paragraph"
+                    p #{smartItemInfo.content}
+                  if smartItemInfo.type === "list"
+                    ul
+                      each item in smartItemInfo.content
+                        li #{item}
+        if article.link
+          each link in article.link
+            a.btn.btn-block.btn-success(href="#{link.href}") #{link.text}
+      .col-md-6
+        img(src="#{article.image.src}", width="100%")
+
+  include ../_modules/footer
